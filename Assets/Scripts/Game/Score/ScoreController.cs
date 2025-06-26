@@ -18,6 +18,9 @@ public class ScoreController : MonoBehaviour
 
         // Notify any listeners that the score has changed (e.g., UI)
         OnScoreChanged.Invoke();
+
+        // Save the high score
+        GameStateManager.SaveHighScore(Score);
     }
     
 }
