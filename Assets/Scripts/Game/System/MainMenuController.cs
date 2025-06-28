@@ -1,31 +1,28 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MainMenuController : MonoBehaviour
 {
-    [SerializeField] private TMP_Text highScoreText;
-    [SerializeField] private Button continueButton;
+    public TMP_Text highScoreText;
 
     private void Start()
     {
-        highScoreText.text = $"High Score: {GameStateManager.LoadHighScore()}";
-
-        if (!GameStateManager.HasSavedGame())
+        if (highScoreText != null)
         {
-            continueButton.interactable = false;
+            int highScore = PlayerPrefs.GetInt("HighScore", 0);
+            highScoreText.text = "High Score: " + highScore;
         }
     }
 
-    public void NewGame()
+    public void StartGame()
     {
-        GameStateManager.DeleteSavedGame();
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Game"); // Make sure this matches the exact name of your game scene
     }
 
-    public void Continue()
+    public void ExitGame()
     {
-        SceneManager.LoadScene("Game");
+        Debug.Log("Exiting Game...");
+        Application.Quit();
     }
 }
