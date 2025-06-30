@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class HealthController : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class HealthController : MonoBehaviour
         if(_currentHealth < 0)
         {
             _currentHealth = 0;
+            HandlePlayerDeath();
         }
 
         if (_currentHealth == 0)
@@ -68,6 +70,18 @@ public class HealthController : MonoBehaviour
         if(_currentHealth > _maximumHealth)
         {
             _currentHealth = _maximumHealth;
+        }
+    }
+
+    
+    private void HandlePlayerDeath()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    void Update() {
+        if(_currentHealth <= 0) {
+            HandlePlayerDeath();
         }
     }
 }
