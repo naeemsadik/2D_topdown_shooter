@@ -18,11 +18,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _smoothedMovementInput;
     private Vector2 _movementInputSmoothVelocity;
     private Camera _camera;
+    private PlayerShoot _playerShoot;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _camera = Camera.main;
+        _playerShoot = GetComponent<PlayerShoot>();
     }
     private void FixedUpdate()
     {
@@ -62,7 +64,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void RotationInDirectionOfInput()
     {
-        if(_movementInput != Vector2.zero)
+        // Only rotate based on movement if not currently aiming/shooting with mouse
+        if(_movementInput != Vector2.zero && _playerShoot != null && !_playerShoot.IsRotatingToMouse())
         {
             Quaternion targetRotation = Quaternion.LookRotation(transform.forward, _smoothedMovementInput);
             Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
