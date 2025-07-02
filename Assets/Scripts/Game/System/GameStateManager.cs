@@ -33,7 +33,31 @@ public static class GameStateManager
     /// </summary>
     public static bool HasSavedGame()
     {
-        return PlayerPrefs.HasKey(HighScoreKey);
+        return PlayerPrefs.HasKey("CurrentScore") && PlayerPrefs.HasKey("PlayerPosX") && PlayerPrefs.HasKey("PlayerPosY");
+    }
+
+    /// <summary>
+    /// Saves the current game state.
+    /// </summary>
+    public static void SaveGame(int score, Vector3 position)
+    {
+        PlayerPrefs.SetInt("CurrentScore", score);
+        PlayerPrefs.SetFloat("PlayerPosX", position.x);
+        PlayerPrefs.SetFloat("PlayerPosY", position.y);
+        PlayerPrefs.SetFloat("PlayerPosZ", position.z);
+        PlayerPrefs.Save();
+    }
+
+    /// <summary>
+    /// Loads the saved game state.
+    /// </summary>
+    public static (int, Vector3) LoadGame()
+    {
+        int score = PlayerPrefs.GetInt("CurrentScore", 0);
+        float x = PlayerPrefs.GetFloat("PlayerPosX", 0f);
+        float y = PlayerPrefs.GetFloat("PlayerPosY", 0f);
+        float z = PlayerPrefs.GetFloat("PlayerPosZ", 0f);
+        return (score, new Vector3(x, y, z));
     }
 
     /// <summary>

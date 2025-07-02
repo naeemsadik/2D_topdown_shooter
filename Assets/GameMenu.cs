@@ -59,6 +59,31 @@ public class GameMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void SaveGame()
+    {
+        // Get current score from ScoreController
+        ScoreController scoreController = FindObjectOfType<ScoreController>();
+        if (scoreController != null)
+        {
+            // Try to find player object to get position
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Vector3 playerPosition = Vector3.zero;
+            if (player != null)
+            {
+                playerPosition = player.transform.position;
+            }
+            
+            GameStateManager.SaveGame(scoreController.Score, playerPosition);
+            Debug.Log("Game saved successfully!");
+        }
+    }
+
+    public void SaveAndQuit()
+    {
+        SaveGame();
+        ReturnToMainMenu();
+    }
+
     public void QuitGame()
     {
         Application.Quit();

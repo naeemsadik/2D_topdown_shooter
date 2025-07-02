@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class ScoreController : MonoBehaviour
 {
@@ -21,6 +22,26 @@ public class ScoreController : MonoBehaviour
 
         // Save the high score
         GameStateManager.SaveHighScore(Score);
+        
+        // Check if score reaches the level-up threshold
+        CheckLevelProgression();
+    }
+    
+    // Sets the score directly (used for loading saved games)
+    public void SetScore(int newScore)
+    {
+        Score = newScore;
+        OnScoreChanged.Invoke();
+        GameStateManager.SaveHighScore(Score);
+    }
+    
+    // Checks if the player should progress to the next level
+    private void CheckLevelProgression()
+    {
+        if (Score >= 350)
+        {
+            SceneManager.LoadScene("Level2"); // Adjust scene name as needed
+        }
     }
     
 }
