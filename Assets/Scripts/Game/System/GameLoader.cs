@@ -33,8 +33,9 @@ public class GameLoader : MonoBehaviour
                 Debug.Log($"Score restored to: {savedScore}");
             }
             
-            // Clear the saved game data after loading
-            ClearSavedGameData();
+            // Note: We no longer automatically clear saved game data after loading
+            // This allows players to continue from their saved position multiple times
+            // Saved game data is now only cleared when starting a new game
         }
     }
     

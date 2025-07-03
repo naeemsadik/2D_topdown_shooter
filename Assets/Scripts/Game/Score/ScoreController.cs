@@ -40,8 +40,21 @@ public class ScoreController : MonoBehaviour
     {
         if (Score >= 350)
         {
-            SceneManager.LoadScene("Level2"); // Adjust scene name as needed
+            // Show congratulations message before progressing to level 2
+            LevelProgressionUI.ShowLevelCompletionMessage(1);
+            
+            // Delay the level transition to allow the message to be shown
+            StartCoroutine(TransitionToLevel2());
         }
+    }
+    
+    private IEnumerator TransitionToLevel2()
+    {
+        // Wait for 4 seconds to show the congratulations message
+        yield return new WaitForSeconds(4f);
+        
+        // Then transition to level 2
+        SceneManager.LoadScene("Level2"); // Adjust scene name as needed
     }
     
 }

@@ -68,4 +68,16 @@ public static class GameStateManager
         PlayerPrefs.DeleteKey(HighScoreKey);
         PlayerPrefs.Save();
     }
+
+    /// <summary>
+    /// Clears the saved game data (used when starting new game).
+    /// </summary>
+    public static void ClearSavedGame()
+    {
+        PlayerPrefs.DeleteKey("CurrentScore");
+        PlayerPrefs.DeleteKey("PlayerPosX");
+        PlayerPrefs.DeleteKey("PlayerPosY");
+        PlayerPrefs.DeleteKey("PlayerPosZ");
+        PlayerPrefs.Save();
+    }
 }

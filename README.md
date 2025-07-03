@@ -25,9 +25,10 @@ This project is a 2D top-down shooter game built with Unity. Below are instructi
     - `PlayerShoot.cs`: Manages player shooting mechanics.
   - **Enemy Control**
     - `EnemySpawner.cs`: Spawns enemies in the game.
-  - **UI Management**
+- **UI Management**
     - `PauseMenuUI.cs`: Manages the pause menu UI elements.
     - `GameMenu.cs`: Controls game UI and interactions.
+    - `LevelProgressionUI.cs`: Manages level progression congratulations messages.
 
 ## Connecting Scripts to Scenes
 
@@ -52,6 +53,11 @@ This project is a 2D top-down shooter game built with Unity. Below are instructi
 2. **UI Setup**
    - Attach `GameMenu.cs` to a UI manager GameObject.
    - Ensure `pauseMenuUI` and `highScoreText` are linked to their respective UI elements.
+   - Attach `LevelProgressionUI.cs` to a UI Canvas GameObject.
+   - Create a congratulations panel with:
+     - A Panel GameObject (for background)
+     - A TMP_Text element for congratulations message
+     - (Optional) A Continue button to dismiss the message
 
 3. **Script Interactions**
    - `PlayerMovement`: Controls player velocity and screen edge limitations.

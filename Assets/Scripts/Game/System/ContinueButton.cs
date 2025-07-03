@@ -17,7 +17,7 @@ public class ContinueButton : MonoBehaviour
         MainMenuController controller = FindObjectOfType<MainMenuController>();
         if (controller != null)
         {
-            controller.StartGame();
+            controller.ContinueGame();
         }
     }
 }
